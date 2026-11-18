@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tambah Porto — Portofolio Game</title>
+  <meta name="theme-color" content="#101315" />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+
+  <header class="site-header is-stuck">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">+</span>
+        <span>Tambah Porto</span>
+      </a>
+      <a class="btn btn-ghost btn-sm" href="index.html">
+        <span>Lihat Website</span><span class="arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="container tool">
+    <div class="tool-head">
+      <span class="eyebrow">Alat bantu</span>
+      <h1>Tambah, edit, dan hapus karya — tanpa menulis kode.</h1>
+      <p class="lead">
+        Isi kolom di bawah, klik <strong>Simpan ke daftar</strong>, lalu salin
+        seluruh daftar ke <code>content.js</code>. Karya yang sudah ada bisa
+        diubah atau dihapus dari daftar di sebelah kanan.
+      </p>
+      <div id="draftNote" class="tool-note" hidden>
+        Isian terakhir dipulihkan dari perangkat ini.
+        <button type="button" class="link-btn" id="clearDraft">Hapus draft</button>
+      </div>
+    </div>
+
+    <div class="tool-grid">
+      <!-- ---------------- FORM ---------------- -->
+      <form class="panel" id="form" novalidate>
+        <h2 class="panel-title" id="formTitle">Data karya baru</h2>
+
+        <div class="field">
+          <label for="judul">Judul <span class="req">wajib</span></label>
+          <input id="judul" name="judul" type="text" placeholder="Contoh: Aether Run" autocomplete="off" />
+          <p class="hint">Nama game / proyek yang mau ditampilkan.</p>
+        </div>
+
+        <div class="field-grid">
+          <div class="field">
+            <label for="genre">Genre / jenis</label>
+            <input id="genre" name="genre" type="text" placeholder="Platformer 2D" autocomplete="off" />
+          </div>
+          <div class="field">
+            <label for="status">Status</label>
+            <input id="status" name="status" type="text" list="statusList" placeholder="Konsep" autocomplete="off" />
+            <datalist id="statusList">
+              <option value="Konsep"></option>
+              <option value="Prototipe"></option>
+              <option value="Dalam Pengerjaan"></option>
+              <option value="Demo Tersedia"></option>
+              <option value="Segera Hadir"></option>
+              <option value="Rilis 2026"></option>
+            </datalist>
+          </div>
+          <div class="field">
+            <label for="tahun">Tahun</label>
+            <input id="tahun" name="tahun" type="text" inputmode="numeric" placeholder="2026" autocomplete="off" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="deskripsi">Deskripsi</label>
+          <textarea id="deskripsi" name="deskripsi" rows="4" placeholder="Dua sampai tiga kalimat: ide intinya apa, dan apa yang membuatnya menarik."></textarea>
+          <p class="hint">Tulis dalam satu paragraf, tanpa menekan Enter di tengah.</p>
+        </div>
+
+        <div class="field">
+          <label for="gambar">Gambar cover</label>
+          <div class="drop-zone" id="dropZone" role="button" tabindex="0" aria-label="Tarik gambar ke sini atau klik untuk memilih file">
+            <div class="drop-inner" id="dropInner">
+              <strong>Tarik gambar ke sini</strong>
+              <span>atau klik untuk memilih file</span>
+              <em>JPG / PNG / WebP — otomatis dikecilkan dan ikut tersimpan di content.js</em>
+            </div>
+            <img id="dropPreview" alt="Pratinjau gambar cover" hidden />
+          </div>
+          <input id="gambarFile" type="file" accept="image/*" hidden />
+          <div class="drop-actions" id="dropActions" hidden>
+            <span class="hint" id="gambarInfo"></span>
+            <button type="button" class="link-btn" id="hapusGambar">Hapus gambar</button>
+          </div>
+          <input id="gambar" name="gambar" type="text" placeholder="atau tulis path manual: assets/nama-file.jpg" autocomplete="off" />
+          <p class="hint">
+            Hasil drop/klik disimpan langsung di dalam <code>content.js</code>, jadi tidak perlu
+            menyalin file ke folder <code>assets/</code>. Kosongkan kalau belum ada gambar.
+          </p>
+        </div>
+
+        <div class="field">
+          <label for="trailer">Link trailer</label>
+          <input id="trailer" name="trailer" type="url" placeholder="https://youtube.com/watch?v=..." autocomplete="off" />
+          <p class="hint">Opsional. Kosongkan kalau belum ada.</p>
+        </div>
+
+        <!-- ======= SCREENSHOTS / GIF DARI DALAM GAME ======= -->
+        <div class="field">
+          <label>Screenshot / GIF dari dalam game</label>
+          <p class="hint">Tarik atau klik untuk menambah beberapa gambar sekaligus. JPG / PNG / WebP / GIF. Maksimal 8 gambar.</p>
+          <div class="shot-drop-zone" id="shotDropZone" role="button" tabindex="0" aria-label="Tarik screenshot ke sini atau klik untuk memilih">
+            <div class="drop-inner" id="shotDropInner">
+              <strong>Tarik screenshot / GIF ke sini</strong>
+              <span>atau klik untuk memilih (bisa pilih banyak sekaligus)</span>
+              <em>JPG / PNG / WebP / GIF — maks 8 gambar</em>
+            </div>
+          </div>
+          <input id="shotFiles" type="file" accept="image/*,.gif" multiple hidden />
+          <div class="shot-grid" id="shotGrid"></div>
+          <p class="form-status" id="shotStatus" role="status" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label>Tautan tambahan</label>
+          <div class="repeat-list" id="tautanList"></div>
+          <button type="button" class="btn btn-ghost btn-sm" id="addTautan">
+            <span>+ Tambah tautan</span>
+          </button>
+          <p class="hint">Misalnya halaman itch.io, Steam, atau demo. Boleh dikosongkan.</p>
+        </div>
+
+        <label class="check">
+          <input type="checkbox" id="unggulan" />
+          <span>
+            <strong>Tampilkan sebagai karya utama</strong>
+            <em>Kartunya jadi lebih besar dan selebar halaman.</em>
+          </span>
+        </label>
+
+        <div class="tool-actions">
+          <button type="submit" class="btn btn-primary">
+            <span id="submitLabel">Simpan ke daftar</span><span class="arrow" aria-hidden="true">→</span>
+          </button>
+          <button type="button" class="btn btn-ghost" id="cancelEdit" hidden>Batal edit</button>
+          <button type="button" class="btn btn-ghost" id="resetForm">Kosongkan form</button>
+        </div>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
+
+      <!-- ---------------- SAMPING ---------------- -->
+      <aside class="tool-side">
+        <div class="panel" id="panelDaftar">
+          <div class="panel-head">
+            <h2 class="panel-title" id="listTitle">Daftar karya (0)</h2>
+            <button type="button" class="btn btn-ghost btn-sm" id="syncFromFile">
+              <span>Muat dari content.js</span>
+            </button>
+          </div>
+          <ul class="entry-list" id="entryList"></ul>
+          <p class="hint" id="listNote"></p>
+        </div>
+
+        <div class="panel">
+          <h2 class="panel-title">Pratinjau kartu</h2>
+          <div class="preview-box">
+            <article class="card" id="previewCard">
+              <div class="card-media" id="previewMedia"></div>
+              <div class="card-body">
+                <div class="card-top">
+                  <span class="pill" id="previewStatus">Konsep</span>
+                  <span class="meta" id="previewMeta"></span>
+                </div>
+                <h3 id="previewJudul">Judul karya</h3>
+                <p id="previewDeskripsi">Deskripsi singkat akan muncul di sini.</p>
+                <div class="card-links" id="previewLinks"></div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2 class="panel-title">Kode untuk content.js</h2>
+            <button type="button" class="btn btn-primary btn-sm" id="copyBtn">
+              <span>Salin semua kode</span>
+            </button>
+          </div>
+          <div class="steps">
+            <p><span>1</span> Klik <strong>Salin semua kode</strong> di atas.</p>
+            <p><span>2</span> Buka <code>content.js</code>, lalu pilih mulai dari <code>game: [</code> sampai <code>],</code> penutupnya.</p>
+            <p><span>3</span> Tempel menimpa pilihan tadi, simpan file, lalu refresh website.</p>
+          </div>
+          <pre class="output" id="output"></pre>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>Alat bantu lokal — tidak perlu internet, tidak mengubah file apa pun.</span>
+      <a class="to-top" href="index.html">Kembali ke website <span aria-hidden="true">→</span></a>
+    </div>
+  </footer>
+
+  <svg class="svg-lendir" width="0" height="0" aria-hidden="true" focusable="false">
+    <filter id="lendir" x="-25%" y="-35%" width="150%" height="185%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.006 0.03" numOctaves="1" seed="17" result="gumpal" />
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0.4" result="lembut" />
+      <feDisplacementMap in="lembut" in2="gumpal" scale="15" xChannelSelector="R" yChannelSelector="G" result="meleleh" />
+      <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="1" seed="4" result="halus" />
+      <feDisplacementMap in="meleleh" in2="halus" scale="1.2" xChannelSelector="R" yChannelSelector="G" result="lendir" />
+      <feDropShadow in="lendir" dx="0" dy="3" stdDeviation="2.2" flood-color="#05070a" flood-opacity="0.9" />
+    </filter>
+  </svg>
+
+  <script src="content.js"></script>
+  <script src="tambah.js"></script>
+  <script src="stars.js"></script>
+  <script>
+    /* Kalau tambah.js tidak termuat (mis. belum diunggah), halaman ini jadi
+       tombol mati. Tampilkan peringatan supaya tidak bingung. */
+    (function () {
+      if (window.__TAMBAH_SIAP) return;
+
+      var kotak = document.createElement("div");
+      kotak.className = "boot-error";
+      kotak.innerHTML =
+        "<strong>Alat bantu gagal dimuat.</strong> " +
+        "Pastikan file <code>tambah.js</code> ada di folder yang sama dengan " +
+        "<code>tambah.html</code>, lalu buka ulang halaman ini. Kalau website " +
+        "sudah diunggah, unggah ulang seluruh foldernya (termasuk " +
+        "<code>tambah.js</code> dan <code>content.js</code>).";
+
+      var utama = document.querySelector("main.tool");
+      if (utama) utama.insertBefore(kotak, utama.firstChild);
+    })();
+  </script>
+</body>
+</html>

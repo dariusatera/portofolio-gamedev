@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portofolio Game</title>
+  <meta name="description" content="Portofolio game indie — karya, galeri, dan kontak." />
+  <meta name="theme-color" content="#101315" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+  <link
+    rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2322272f'/%3E%3Crect x='9' y='9' width='14' height='14' rx='3' fill='%23b5b5b5'/%3E%3C/svg%3E"
+  />
+</head>
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div id="app"></div>
+
+  <!-- Filter lendir untuk judul besar (dipakai di styles.css). -->
+  <svg class="svg-lendir" width="0" height="0" aria-hidden="true" focusable="false">
+    <filter id="lendir" x="-25%" y="-35%" width="150%" height="185%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.006 0.03" numOctaves="1" seed="17" result="gumpal" />
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0.4" result="lembut" />
+      <feDisplacementMap in="lembut" in2="gumpal" scale="15" xChannelSelector="R" yChannelSelector="G" result="meleleh" />
+      <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="1" seed="4" result="halus" />
+      <feDisplacementMap in="meleleh" in2="halus" scale="1.2" xChannelSelector="R" yChannelSelector="G" result="lendir" />
+      <feDropShadow in="lendir" dx="0" dy="3" stdDeviation="2.2" flood-color="#05070a" flood-opacity="0.9" />
+    </filter>
+  </svg>
+  <script src="content.js"></script>
+  <script src="app.js"></script>
+  <script src="stars.js"></script>
+</body>
+</html>
