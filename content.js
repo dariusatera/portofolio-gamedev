@@ -21,15 +21,15 @@ const konten = {
      IDENTITAS — nama studio/kamu dan info dasar
      ------------------------------------------------------------------ */
   identitas: {
-    nama: "Darius Studio", // nama studio / nama kamu
-    inisial: "DB", // 2 huruf untuk logo kecil di pojok kiri atas
-    tagline: "Game independen yang dibuat dengan sabar, satu pixel demi satu pixel.",
+    nama: "Firmas Ferdiasnya", // nama studio / nama kamu
+    inisial: "FF", // 2 huruf untuk logo kecil di pojok kiri atas
+    tagline: "Game independen yang saya bangun sendiri, satu pixel demi satu pixel.",
     deskripsi:
-      "Studio kecil berisi dua orang yang membuat game bertema atmosferik: platformer, puzzle, dan cerita pendek yang bisa diselesaikan dalam satu malam.",
-    lokasi: "Bandung, Indonesia",
-    email: "halo@dariusstudio.com",
+      "Seorang individu, bukan studio: mahasiswa Teknik Informatika Universitas Negeri Surabaya (UNESA) yang mengerjakan game dari desain, kode, sampai audio sendiri.",
+    lokasi: "Surabaya, Indonesia",
+    email: "24051204025@mhs.unesa.ac.id",
     // Tombol di pojok kanan atas
-    tombolHeader: { teks: "Hubungi Saya", url: "mailto:halo@dariusstudio.com" },
+    tombolHeader: { teks: "Hubungi Saya", url: "mailto:24051204025@mhs.unesa.ac.id" },
   },
 
   /* ------------------------------------------------------------------
@@ -89,9 +89,9 @@ const konten = {
     judul: "Siapa yang membuat ini",
     gambar: "", // contoh: "assets/foto.jpg"
     paragraf: [
-      "Saya mulai membuat game tahun 2021 sebagai hobi, lalu pindah ke studio kecil dua orang setelah game pertama mendapat cukup banyak pemain untuk membiayai game kedua.",
-      "Saya mengerjakan hampir semua bagian sendiri: desain level, pemrograman gameplay, UI, dan audio. Untuk seni karakter, saya bekerja sama dengan ilustrator langganan.",
-      "Fokus saya sederhana — game pendek dengan ide yang jelas, yang tidak meminta pemain menghabiskan 40 jam untuk memahami ceritanya.",
+      "Halo, saya Firmas Ferdiasnya — seorang individu, bukan studio. Semua game di halaman ini saya kerjakan sendiri: mulai dari ide, desain level, pemrograman gameplay, UI, sampai audio.",
+      "Saat ini saya menempuh studi Teknik Informatika di Universitas Negeri Surabaya (UNESA). Membuat game adalah cara saya menguji hal-hal yang saya pelajari di kelas ke dalam proyek nyata yang bisa dimainkan orang lain.",
+      "Fokus saya sederhana — game pendek dengan ide yang jelas, yang tidak meminta pemain menghabiskan 40 jam untuk memahami ceritanya. Saya terbuka untuk masukan, kolaborasi, dan proyek sampingan.",
     ],
     // Daftar keahlian / tools, boleh ditambah atau dikurangi
     keahlian: ["Unity & C#", "Godot", "Level Design", "Game Feel", "Sound Design", "Pixel Art"],
@@ -115,7 +115,7 @@ const konten = {
     judul: "Ada ide kolaborasi?",
     deskripsi:
       "Terbuka untuk kerja sama desain level, kontrak pemrograman gameplay jangka pendek, atau sekadar ngobrol soal game. Balasan biasanya dalam 1–2 hari.",
-    tombol: { teks: "Kirim Email", url: "mailto:halo@dariusstudio.com" },
+    tombol: { teks: "Kirim Email", url: "mailto:24051204025@mhs.unesa.ac.id" },
     // Sosial media / tautan lain
     tautan: [
       { teks: "itch.io", url: "#" },
@@ -128,5 +128,5 @@ const konten = {
   /* ------------------------------------------------------------------
      FOOTER — teks kecil paling bawah
      ------------------------------------------------------------------ */
-  footer: "© 2026 Darius Studio. Dibuat sendiri dengan sedikit kopi.",
+  footer: "© 2026 Firmas Ferdiasnya. Dibuat sendiri dengan sedikit kopi.",
 };
